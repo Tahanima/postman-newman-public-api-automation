@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "15b4100d-40f9-405e-8836-899e150e27e5",
+		"name": "Public API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4174924"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Successful health check should return 200', function() {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Successful health check should have the \"alive\" key set to \"true\"', function(){",
+							"    pm.response.to.have.jsonBody({ \"alive\": true });",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{publicApiBaseUrl}}/health",
+					"host": [
+						"{{publicApiBaseUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Successful listing of categories should return 200', function(){",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Successful listing of categories should return positive count', function(){",
+							"    let payload = pm.response.json()",
+							"",
+							"    pm.expect(payload.count).to.be.above(0);",
+							"})",
+							"",
+							"pm.test('Successful listing of categories should return non-null categories', function(){",
+							"    let payload = pm.response.json()",
+							"",
+							"    pm.expect(payload.categories).length.to.be.above(0);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{publicApiBaseUrl}}/categories",
+					"host": [
+						"{{publicApiBaseUrl}}"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List A Single Entry Selected At Random",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Successful listing of a random entry should return 200', function(){",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Successful listing of a random entry should return value for \"count\" key as 1', function(){",
+							"    let payload = pm.response.json()",
+							"",
+							"    pm.expect(payload.count).to.be.eq(1);",
+							"})",
+							"",
+							"pm.test('Successful listing of a random entry should return 1 entry', function(){",
+							"    let payload = JSON.parse(pm.response.text());",
+							"",
+							"    pm.expect(payload.entries.length).to.be.eq(1);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{publicApiBaseUrl}}/random",
+					"host": [
+						"{{publicApiBaseUrl}}"
+					],
+					"path": [
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List All Entries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Successful listing of entries should return 200', function(){",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Successful listing of entries should return positive count', function(){",
+							"    let payload = pm.response.json()",
+							"",
+							"    pm.expect(payload.count).to.be.above(0);",
+							"})",
+							"",
+							"pm.test('Successful listing of entries should return non-null entries', function(){",
+							"    let payload = pm.response.json()",
+							"",
+							"    pm.expect(payload.entries).length.to.be.above(0);",
+							"})",
+							"",
+							"pm.test('Successful listing of entries should return correct number of entries', function(){",
+							"    let payload = pm.response.json()",
+							"",
+							"    pm.expect(payload.entries.length).to.be.eq(payload.count);",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{publicApiBaseUrl}}/entries",
+					"host": [
+						"{{publicApiBaseUrl}}"
+					],
+					"path": [
+						"entries"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
