@@ -14,7 +14,11 @@ git clone https://github.com/[your_username]/postman-newman-public-api-automatio
 ```bash
 npm install -g newman
 ```
-5. Now, run the Public API postman collection using
+5. Go to the `postman-newman-public-api-automation` folder
+```
+cd postman-newman-public-api-automation
+```
+6. Now, run the test cases in Public API postman collection using
 ```bash
 newman run "Public API.postman_collection.json" -g public_api.postman_globals.json
 ```
